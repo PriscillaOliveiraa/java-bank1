@@ -2,6 +2,7 @@ package br.com.dio.model.repository;
 
 import br.com.dio.model.Investment;
 import br.com.dio.model.InvestmentWallet;
+import br.com.dio.model.exception.PixInUseException;
 import br.com.dio.model.exception.WalletNotFoundException;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class InvestmentRepository {
     private final List<Investment> investments = new ArrayList<>();
     private final List<InvestmentWallet> wallets = new ArrayList<>();
 
-    public Investment create(final long tax, final long daysToRescue, final long initialFunds){
+    public Investment create(final long tax,  final long initialFunds){
         this.nextId ++;
         var investment = new Investment(this.nextId, tax, initialFunds);
         investments.add(investment);
@@ -20,6 +21,11 @@ public class InvestmentRepository {
     }
 
     public InvestmentWallet initInvestment(final AccountWallet account, final long id){
+        var accountInUse = wallets.stream().map(InvestmentWallet :: getAccount().toList();
+        if (accountInUse.contains(account)){
+            throw new PixInUseException("O pix" + p + " já está em uso");
+            }
+
         var investment :investment = findById(id);
         checkFundsForTransaction(account, investment.initialFunds());
         var wallet = new InvestmentWallet(investment, account, investment.initFunds());
