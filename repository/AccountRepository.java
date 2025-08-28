@@ -6,6 +6,14 @@ import java.util.List;
 
 public class AccountRepository {
     private List<AccountWallet> accounts;
+    
+    public AccountWallet create(final List<String> pix, final long initialFunds){
+        var pixInUse :List<String> = accounts.stream().flatMap(AccountWallet a -> a.getPix().stream()).toList();
+        for (var p : pix) {
+            if (pixInUse.contains(pix.get(i)){
+                throw new PixInUseException("O pix" + p + " já está em uso");
+            }
+        }
     public AccountWallet create(final List<String> pix, final long initialFunds){
         var newAccount = new AccountWallet(initialFunds, pix);
         return newAccount;
@@ -42,3 +50,4 @@ public class AccountRepository {
         return this.accounts;
     }
 }
+
