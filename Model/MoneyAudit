@@ -1,0 +1,13 @@
+package br.com.dio.model;
+
+import java.time.OffsetDateTime;
+import java.util.UUID;
+//OffsetDateTime
+
+public record MoneyAudit (
+    UUID transactionId,
+    BankService targetService,
+    //serviço utilizado
+    String description,
+    OffsetDateTime createdAt)
+//data e hora do ocorrido
