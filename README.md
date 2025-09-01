@@ -6,7 +6,9 @@ Este projeto propõe uma simulação de sistema bancário virtual construído em
 Utiliza recursos da linguagem Java para estruturar as diferentes partes de um sistema financeiro.
 
 🎯 Objetivo do projeto
-Desenvolvido como parte do desafio do Bootcamp Riachuelo - Primeiros Passos com Java, da plataforma DIO . O projeto tem como meta criar aplicações back-end em Java, com foco em código limpo e versionado, e boas práticas para uso em ambientes reais. O conteúdo está alinhado com o dia a dia de desenvolvedores back-end.
+
+Desenvolvido como parte do desafio do Bootcamp Riachuelo - Primeiros Passos com Java, da plataforma DIO. 
+O projeto tem como meta criar aplicações back-end em Java, com foco em código limpo e versionado, e boas práticas para uso em ambientes reais. O conteúdo está alinhado com o dia a dia de desenvolvedores back-end.
 
 📋 Pré-requisitos
 
@@ -21,6 +23,7 @@ Java 11 - A linguagem principal usada;
 Records - Recurso moderno do Java para classes de dados.
 
 📦 Implementação
+
 Este projeto está estruturado de seguinte forma:
 O main apresenta um codigo para o menu de opções no console, permitindo que o usuário escolha a operação desejada (criar conta, depositar, sacar, etc.). 
  
