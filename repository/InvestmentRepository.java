@@ -2,6 +2,7 @@ package br.com.dio.model.repository;
 
 import br.com.dio.model.Investment;
 import br.com.dio.model.InvestmentWallet;
+import br.com.dio.model.exception.AccountWithInvestmentException;
 import br.com.dio.model.exception.PixInUseException;
 import br.com.dio.model.exception.WalletNotFoundException;
 
@@ -21,12 +22,12 @@ public class InvestmentRepository {
     }
 
     public InvestmentWallet initInvestment(final AccountWallet account, final long id){
-        var accountInUse = wallets.stream().map(InvestmentWallet :: getAccount().toList();
+        var accountInUse = wallets.stream().map(InvestmentWallet :: getAccount).toList();
         if (accountInUse.contains(account)){
-            throw new PixInUseException("O pix" + p + " já está em uso");
+            throw new AccountWithInvestmentException("A conta" + account + " já possui um investimento");
             }
 
-        var investment :investment = findById(id);
+        var investment = findById(id);
         checkFundsForTransaction(account, investment.initialFunds());
         var wallet = new InvestmentWallet(investment, account, investment.initFunds());
         wallets.add(wallet);
@@ -34,13 +35,13 @@ public class InvestmentRepository {
     }
 
     public InvestmentWallet deposit(final String pix, final long funds){
-        var wallet :InvestmentWallet = findWalletByAccountPix(pix);
+        var wallet = findWalletByAccountPix(pix);
         wallet.addMoney(wallet.getAccount().reduceMoney(funds), wallet.getService(), description "Investimentos");
         return wallet;
     }
 
     public InvestmentWallet withDraw(final  String pix, final long funds){
-        var wallet :InvestmentWallet = findWalletByAccountPix(pix);
+        var wallet = findWalletByAccountPix(pix);
         checkFundsForTransaction(wallet,funds);
         wallet.getAccount().addMoney(wallet.reduceMoney(funds), wallet.getService(), description: "saque de investimentos");
         if (wallet.getFunds() == 0){
@@ -52,14 +53,13 @@ public class InvestmentRepository {
 
     public void updateAmount(final long percent){
         wallets.forEach(InvestmentWallet w -> w.updateAmount(percent));
-
     }
 
     public InvestmentWallet findById(final long id){
         return wallets.stream()
                 .filter(InvestmentWallet w -> w.getAccount().getPix()
                         .contains(pix)).findFirst() Opcional<InvestmentWallet>.orElseThrow(
-                () -> new WalletNotFoundException("O investimento " + id + " não foi encontrada")
+                () -> new WalletNotFoundException("O investimento " + id + " não foi encontrado")
         );
     }
 
@@ -76,6 +76,6 @@ public class InvestmentRepository {
     }
 
     public List<Investment> List(){
-        return this.investments
+        return this.investments;
     }
 }
