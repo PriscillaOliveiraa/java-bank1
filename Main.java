@@ -136,7 +136,7 @@ public class Main {
         var amount = scanner.nextLong();
         try {
             investmentRepository.deposit(pix, amount);
-        } catch (AccountNotFoundException ex){
+        } catch (WalletNotFoundException | AccountNotFoundException ex){
             System.out.println(ex.getMessage());
         }
     }
@@ -169,3 +169,4 @@ public class Main {
 
     }
 }
+
