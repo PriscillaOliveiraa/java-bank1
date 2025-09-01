@@ -5,4 +5,14 @@ public record Investment (
         long tax,
         //long daysToRescue,
         long intialFunds)
-{ }
+{
+    @Override
+    public String toString(){
+        return "Investment{" +
+                "id= " + id +
+                ", tax=" + tax + "%"+
+                ", intialFunds=" + (intialFunds/100) + "," + (intialFunds % 100)+
+                '}';
+    }
+
+}
